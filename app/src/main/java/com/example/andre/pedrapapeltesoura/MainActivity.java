@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.Random;
 
@@ -29,6 +32,7 @@ public class MainActivity extends Activity {
     public void opcaoSelecionada(String escolhaUsuario){
 
         ImageView imagemResultado = (ImageView) findViewById(R.id.imageResultado);
+        TextView exibirResultado = (TextView) findViewById(R.id.textResultado);
 
         // gerando número aleatório para escolha do App
         String [] opcoes = {"pedra", "papel", "tesoura"};
@@ -45,6 +49,23 @@ public class MainActivity extends Activity {
             case "tesoura" :
                 imagemResultado.setImageResource(R.drawable.tesoura);
                 break;
+        }
+        if (
+                (escolhaApp == "pedra" && escolhaUsuario == "tesoura")||
+                (escolhaApp == "papel" && escolhaUsuario == "pedra")||
+                (escolhaApp == "tesoura" && escolhaUsuario == "papel")
+                ) { //app ganha
+            exibirResultado.setText("Você perdeu :( ");
+
+        }else if(
+                (escolhaUsuario == "pedra" && escolhaApp == "tesoura")||
+                (escolhaUsuario == "papel" && escolhaApp == "pedra")||
+                (escolhaUsuario == "tesoura" && escolhaApp == "papel")
+                ){ // Usuario ganha
+            exibirResultado.setText("Você ganhou - Parabéns :) ");
+
+        }else{// empate
+            exibirResultado.setText("Houve um empate! ");
         }
     }
 }
